@@ -1,0 +1,43 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34330.188
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TactiForge.API", "TactiForge.API\TactiForge.API.csproj", "{7F324247-0D64-4F79-9B17-EF90616CB69F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TactiForge.Core", "TactiForge.Core\TactiForge.Core.csproj", "{58D68FA7-6892-4A08-A902-F760C67267C4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TactiForge.Repository", "TactiForge.Repository\TactiForge.Repository.csproj", "{60AD95F4-5C3A-412E-A2AE-9C159722D626}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TactiForge.Services", "TactiForge.Services\TactiForge.Services.csproj", "{0C2433F9-3848-4F44-9185-9A5370B6B893}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7F324247-0D64-4F79-9B17-EF90616CB69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F324247-0D64-4F79-9B17-EF90616CB69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F324247-0D64-4F79-9B17-EF90616CB69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F324247-0D64-4F79-9B17-EF90616CB69F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{58D68FA7-6892-4A08-A902-F760C67267C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{58D68FA7-6892-4A08-A902-F760C67267C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{58D68FA7-6892-4A08-A902-F760C67267C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{58D68FA7-6892-4A08-A902-F760C67267C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60AD95F4-5C3A-412E-A2AE-9C159722D626}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60AD95F4-5C3A-412E-A2AE-9C159722D626}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60AD95F4-5C3A-412E-A2AE-9C159722D626}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60AD95F4-5C3A-412E-A2AE-9C159722D626}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C2433F9-3848-4F44-9185-9A5370B6B893}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2433F9-3848-4F44-9185-9A5370B6B893}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2433F9-3848-4F44-9185-9A5370B6B893}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2433F9-3848-4F44-9185-9A5370B6B893}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {87351B2A-E7D7-45E1-B31F-24050ED4196A}
+	EndGlobalSection
+EndGlobal
