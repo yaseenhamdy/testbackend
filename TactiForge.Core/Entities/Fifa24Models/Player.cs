@@ -6,7 +6,7 @@ namespace TactiForge.Repository.Entities.Fifa24Models;
 public partial class Player
 {
     public int PlayerId { get; set; }
-
+    
     public int? FifaVersion { get; set; }
 
     public string? LongName { get; set; }

@@ -42,7 +42,8 @@ namespace TactiForge.API.Controllers
                 PlayerName = p.LongName,
                 PlayerPosision = p.PlayerPositions,
                 PlayerImg = p.PlayerFaceUrl
-            }).ToList();
+
+        }).ToList();
 
             var response = new PlayersResponseDTO
             {
@@ -56,11 +57,6 @@ namespace TactiForge.API.Controllers
 
             return Ok(response);
         }
-
-
-
-     
-
     }
 }
 

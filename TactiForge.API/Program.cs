@@ -76,7 +76,11 @@ namespace TactiForge.API
             try
             {
                 await userContext.Database.MigrateAsync();
+
                 await UserSeeding.SeedUserAsync(userManager);
+                // await S3Uploader.UploadFolderToS3Async();  
+                //await ImageSeeding.Run(services);
+
             }
             catch (Exception ex)
             {
@@ -99,6 +103,8 @@ namespace TactiForge.API
                 app.UseSwagger();
                 app.UseSwaggerUI();
             }
+            app.UseStaticFiles();
+
 
             app.UseHttpsRedirection();
 
