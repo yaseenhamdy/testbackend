@@ -78,8 +78,8 @@ namespace TactiForge.API
                 await userContext.Database.MigrateAsync();
 
                 await UserSeeding.SeedUserAsync(userManager);
-                // await S3Uploader.UploadFolderToS3Async();  
-                //await ImageSeeding.Run(services);
+               // await S3Uploader.UploadFolderToS3Async();  
+                
 
             }
             catch (Exception ex)
@@ -90,6 +90,8 @@ namespace TactiForge.API
             #endregion
 
 
+
+// test github
 
 
 

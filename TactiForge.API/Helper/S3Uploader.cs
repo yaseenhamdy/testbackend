@@ -17,40 +17,45 @@ public class S3Uploader
     private static readonly string folderPath = @"E:\Yassen\images_scraping\player_images_scraping\player_images\"; // المسار الكامل للفولدر المحلي
 
     // Initialize S3 client with the region
-    private static readonly IAmazonS3 s3Client = new AmazonS3Client(RegionEndpoint.EUNorth1);  
+    private static readonly IAmazonS3 s3Client = new AmazonS3Client(RegionEndpoint.EUNorth1);
 
     // Main method to upload the folder to S3 and update database
     public static async Task UploadFolderToS3Async()
     {
         var transferUtility = new TransferUtility(s3Client);
 
-        // Get all files from the local folder
         var files = Directory.GetFiles(folderPath);
+        Console.WriteLine($"Total files found: {files.Length}");
 
         foreach (var filePath in files)
         {
-            // Get the PlayerId from the file name (without extension)
-            var playerId = Path.GetFileNameWithoutExtension(filePath); // اسم الملف بدون الامتداد هو الـ PlayerId
-            var fileName = Path.GetFileName(filePath); // اسم الصورة (PlayerId.jpg أو PlayerId.png)
-            var keyName = $"images/{fileName}"; // اسم الـ key داخل الـ S3 باستخدام اسم الصورة كـ key
+            var playerId = Path.GetFileNameWithoutExtension(filePath);
+            var fileName = Path.GetFileName(filePath);
+            var keyName = $"images/{fileName}";
 
-            // Check if the image already exists in S3 to avoid re-uploading it
+            // Check if the image already exists in S3
             bool imageExists = await CheckIfImageExistsAsync(keyName);
             if (imageExists)
             {
-                Console.WriteLine($"Player's image {playerId} already exists in S3. It won't be uploaded again.");
-                continue; 
+                Console.WriteLine($"[SKIP] Image for PlayerId {playerId} already exists in S3.");
+                continue;
             }
+
+            Console.WriteLine($"[UPLOAD] Uploading image for PlayerId {playerId}...");
 
             // Upload the image to S3
             await transferUtility.UploadAsync(filePath, bucketName, keyName);
+
+            Console.WriteLine($"[SUCCESS] Image uploaded for PlayerId {playerId}.");
 
             // Get the URL of the uploaded image
             var url = $"https://{bucketName}.s3.{RegionEndpoint.EUNorth1.SystemName}.amazonaws.com/{keyName}";
 
             // Save the image URL in the database for the corresponding player
-            await SaveFaceUrlToDatabaseAsync(url, playerId); // دالة لتخزين الـ URL في قاعدة البيانات
+            await SaveFaceUrlToDatabaseAsync(url, playerId);
         }
+
+        Console.WriteLine("All uploads finished ✅");
     }
 
     // Check if the image already exists in S3
@@ -77,14 +82,18 @@ public class S3Uploader
     // Save the image URL in the database for the corresponding player
     private static async Task SaveFaceUrlToDatabaseAsync(string faceUrl, string playerId)
     {
-        // Code to save the face URL in the Player table
-        using (var context = new Fifa24DbContext()) // استخدم الـ DbContext الخاص بك
+        using (var context = new Fifa24DbContext())
         {
-            var player = await context.Players.FirstOrDefaultAsync(p => p.PlayerId.ToString() == playerId); // تحديد الـ Player
+            var player = await context.Players.FirstOrDefaultAsync(p => p.PlayerId.ToString() == playerId);
             if (player != null)
             {
-                player.PlayerFaceUrl = faceUrl; // تخزين الـ URL في العمود PlayerFaceUrl
-                await context.SaveChangesAsync(); // حفظ التغييرات في قاعدة البيانات
+                player.PlayerFaceUrl = faceUrl;
+                await context.SaveChangesAsync();
+                Console.WriteLine($"[DB] Updated PlayerFaceUrl for PlayerId {playerId}.");
+            }
+            else
+            {
+                Console.WriteLine($"[DB] PlayerId {playerId} not found in database ❗");
             }
         }
     }
